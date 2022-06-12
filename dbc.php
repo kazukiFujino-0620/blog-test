@@ -2,8 +2,9 @@
 
 Class Dbc
 {
+    protected $table_name;
     //1.データ接続
-    function dbConnect()
+    protected function dbConnect()
     {
         $dsn ='mysql:host=localhost;dbname=blog_app;charset=utf8';
         $user = 'blog_user';
@@ -22,31 +23,14 @@ Class Dbc
             return $dbh;
     }
     //2.データ取得
-    function getAllBlog()
+    function getAll()
     {
         $dbh = $this->dbConnect();
-        $sql ='SELECT * FROM blog';
+        $sql = 'SELECT * FROM blog';
         $stmt = $dbh->query($sql);
         $result = $stmt -> fetchall(PDO::FETCH_ASSOC);
         return $result;
         $dbh = null;
-    }
-
-    //3.カテゴリー名表示
-    function setCategoryName($category)
-    {
-        if($category  == '1')
-        {
-            return '日常';
-        }
-        else if($category  == '2')
-        {
-            return '動画編集';
-        }
-        else
-        {
-            return 'その他';
-        }
     }
 
     function getBlog($id)
@@ -72,31 +56,6 @@ Class Dbc
         }
 
         return $result;
-    }
-
-    function blogCreate($blogs)
-    {
-        $sql ='INSERT INTO 
-            blog(title,content,category,publish_status)
-            VALUES
-            (:title,:content,:category,:publish_status)';
-
-        $dbh = $this->dbConnect();
-        $dbh -> beginTransaction();
-        try
-        {
-            $stmt = $dbh->prepare($sql);
-            $stmt ->bindValue(':title',$blogs['title'],PDO::PARAM_STR);
-            $stmt ->bindValue(':content',$blogs['content'],PDO::PARAM_STR);
-            $stmt ->bindValue(':category',$blogs['category'],PDO::PARAM_INT);
-            $stmt ->bindValue(':publish_status',$blogs['publish_status'],PDO::PARAM_INT);
-            $stmt ->execute();
-            $dbh -> commit();
-            echo '登録完了しました。';
-        }catch(PDOException $e){
-            $dbh->rollBack();
-            exit($e);
-        }
     }
 }
 
