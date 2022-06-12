@@ -7,7 +7,6 @@ $blogData = $dbc->getAllBlog();
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
