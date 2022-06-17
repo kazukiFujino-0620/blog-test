@@ -15,26 +15,35 @@ $blogData = $blog->getAll();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ブログ一覧</title>
+    <title>掲示板一覧</title>
 </head>
 <body>
-    <h2>ブログ一覧</h2>
-    <p><a href ="/form.html">新規作成</a></p>
+    <h2>掲示板一覧</h2>
     <table>
-        <tr>
-            <th>No</th>
-            <th>タイトル</th>
-            <th>カテゴリ</th>
-        </tr>
         <?php foreach($blogData as $column): ?>
         <tr>
-            <td><?php echo $column['id']?></td>
-            <td><?php echo $column['title']?></td>
-            <td><?php echo $blog->setCategoryName($column['category'])?></td>           
-            <td><a href="/detail.php?id=<?php echo $column['id']?>">詳細</td>
-            <td><a href="/update_form.php?id=<?php echo $column['id']?>">編集</td>
+            <td><a href="/Detail.php?id=<?php echo $column['id']?>"><?php echo $column['id']?></td>
+            <p style="text-align: left">
+                <td><?php echo $column['name']?></td>
+            </p>
+            <td><?php echo ($column['post_at'])?></td> 
+        </tr>
+        <tr>
+            <td>本文:</td>
+        </tr>
+        <tr>
+            <td><?php echo $column['content']?></td>
+        </tr>
+        <tr>
+            <td></td>
+            <p style="text-align: right">
+                <td><a href="/update_form.php?id=<?php echo $column['id']?>">編集</td>
+                <td><a href="/reply.php?id=<?php echo $column['id']?>">返信</td>
+            </p>
         </tr>
         <?php endforeach; ?>
     </table>
+    <hr>
+    <p><a href ="/form.html">新規作成</a></p>
 </body>
 </html>

@@ -5,22 +5,22 @@ Class Blog extends Dbc
 {
     protected $table_name = 'blog';
 
-    // カテゴリー名表示
-    public function setCategoryName($category)
-    {
-        if($category  == '1')
-        {
-            return '日常';
-        }
-        else if($category  == '2')
-        {
-            return '動画編集';
-        }
-        else
-        {
-            return 'その他';
-        }
-    }
+    // // カテゴリー名表示
+    // public function setCategoryName($category)
+    // {
+    //     if($category  == '1')
+    //     {
+    //         return '日常';
+    //     }
+    //     else if($category  == '2')
+    //     {
+    //         return '動画編集';
+    //     }
+    //     else
+    //     {
+    //         return 'その他';
+    //     }
+    // }
 
     // ブログ作成
     public function blogCreate($blogs)
@@ -28,18 +28,18 @@ Class Blog extends Dbc
         $sql =
             "INSERT INTO 
                 blog
-                (title,content,category,publish_status)
+                (name,title,content,publish_status)
             VALUES
-                (:title,:content,:category,:publish_status)";
+                (:name,:title,:content,:publish_status)";
 
         $dbh = $this->dbConnect();
         $dbh -> beginTransaction();
         try
         {
             $stmt = $dbh->prepare($sql);
+            $stmt ->bindValue(':name',$blogs['name'],PDO::PARAM_STR);
             $stmt ->bindValue(':title',$blogs['title'],PDO::PARAM_STR);
             $stmt ->bindValue(':content',$blogs['content'],PDO::PARAM_STR);
-            $stmt ->bindValue(':category',$blogs['category'],PDO::PARAM_INT);
             $stmt ->bindValue(':publish_status',$blogs['publish_status'],PDO::PARAM_INT);
             $stmt ->execute();
             $dbh -> commit();
@@ -59,9 +59,9 @@ Class Blog extends Dbc
                 "UPDATE
                     blog
                 SET
-                    title = :title
+                    name = :name
+                    ,title = :title
                     ,content = :content
-                    ,category = :category
                     ,publish_status = :publish_status
                 WHERE
                     id = :id";
@@ -71,9 +71,9 @@ Class Blog extends Dbc
             try
             {
                 $stmt = $dbh->prepare($sql);
+                $stmt ->bindValue(':name',$blogs['name'],PDO::PARAM_STR);
                 $stmt ->bindValue(':title',$blogs['title'],PDO::PARAM_STR);
                 $stmt ->bindValue(':content',$blogs['content'],PDO::PARAM_STR);
-                $stmt ->bindValue(':category',$blogs['category'],PDO::PARAM_INT);
                 $stmt ->bindValue(':publish_status',$blogs['publish_status'],PDO::PARAM_INT);
                 $stmt ->bindValue(':id',$blogs['id'],PDO::PARAM_INT);
                 $stmt ->execute();
@@ -97,14 +97,18 @@ Class Blog extends Dbc
         {
             exit('文字数が超過しています。(50文字以内)');
         }
+        if(mb_strlen($blogs['name']) > 12)
+        {
+            exit('文字数が超過しています。(11文字以内)');
+        }
         if(empty($blogs['content']))
         {
             exit('本文を入力してください');
         }
-        if(empty($blogs['category']))
-        {
-            exit('カテゴリーを選択してください');
-        }
+        // if(empty($blogs['category']))
+        // {
+        //     exit('カテゴリーを選択してください');
+        // }
         if(empty($blogs['publish_status']))
         {
             exit('公開ステータスを選択してください');

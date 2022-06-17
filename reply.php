@@ -1,3 +1,16 @@
+<?php
+require_once('blog.php');
+
+$blog = new Blog();
+$result = $blog->getBlog($_GET['id']);
+
+$id = $result['id'];
+$title = $result['title'];
+$content = $result['content'];
+$category = (int)$result['category'];
+$publish_status = $result['publish_status'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -7,15 +20,15 @@
         <title>CreateForm</title>
     </head>
 <body>
-    <h2>入力フォーム</h2>
+    <h2>返信フォーム</h2>
     <form action ="blog_create.php" method="POST">
         <p>タイトル:</p>
         <input type="text" name="title">
         <p>名前:</p>
         <input type="text" name="name">
-        <br>
+        <hr>
         <p>本文:</p>
-        <textarea name="content" id="content" cols="30" rows="10"></textarea>
+        <textarea name="content" id="content" cols="30" rows="10"><?php echo ">>$id" ?></textarea>
         <br>
         <!-- <p>カテゴリ:</p>
         <select name="category">
@@ -26,7 +39,7 @@
         <input type ="radio" name="publish_status" value="1" checked>公開
         <input type ="radio" name="publish_status" value="0">非公開
         <br>
-        <input type ="submit" value="送信">
+        <input type ="submit" value="返信">
     </form>
 </body>
 </html>
