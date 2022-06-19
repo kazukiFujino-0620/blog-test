@@ -106,10 +106,10 @@ Class Blog extends Dbc
         // {
         //     exit('カテゴリーを選択してください');
         // }
-        if(empty($blogs['publish_status']))
-        {
-            exit('公開ステータスを選択してください');
-        }
+        // if(empty($blogs['publish_status']))
+        // {
+        //     exit('公開ステータスを選択してください');
+        // }
     }
 }
 ?>
