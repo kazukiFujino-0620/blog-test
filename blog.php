@@ -28,9 +28,9 @@ Class Blog extends Dbc
         $sql =
             "INSERT INTO 
                 blog
-                (name,title,content)
+                (name,title,content,post_at)
             VALUES
-                (:name,:title,:content)";
+                (:name,:title,:content :post_at)";
 
         $dbh = $this->dbConnect();
         $dbh -> beginTransaction();
@@ -39,6 +39,7 @@ Class Blog extends Dbc
             $stmt = $dbh->prepare($sql);
             $stmt ->bindValue(':name',$blogs['name'],PDO::PARAM_STR);
             $stmt ->bindValue(':title',$blogs['title'],PDO::PARAM_STR);
+            $stmt ->bindValue(':content',$blogs['content'],PDO::PARAM_STR);
             $stmt ->bindValue(':content',$blogs['content'],PDO::PARAM_STR);
             $stmt ->execute();
             $dbh -> commit();
