@@ -35,10 +35,10 @@ $publish_status = $result['publish_status'];
         <select name="category">
             <option value="1" <?php if(category == 1) echo "selected" ?>>日常</option>
             <option value="2"<?php if(category == 2) echo "selected" ?>>動画編集</option>
-        </select> -->
+        </select>>
         <br>
         <input type ="radio" name="publish_status" value="1" <?php if($publish_status == 1) echo "checked"?>>公開
-        <input type ="radio" name="publish_status" value="0"<?php if($publish_status == 0) echo "checked"?>>非公開
+        <input type ="radio" name="publish_status" value="0"<?php if($publish_status == 0) echo "checked"?>>非公開 -->
         <br>
         <input type ="submit" value="送信">
     </form>

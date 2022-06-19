@@ -28,9 +28,9 @@ Class Blog extends Dbc
         $sql =
             "INSERT INTO 
                 blog
-                (name,title,content,publish_status)
+                (name,title,content)
             VALUES
-                (:name,:title,:content,:publish_status)";
+                (:name,:title,:content)";
 
         $dbh = $this->dbConnect();
         $dbh -> beginTransaction();
@@ -40,7 +40,6 @@ Class Blog extends Dbc
             $stmt ->bindValue(':name',$blogs['name'],PDO::PARAM_STR);
             $stmt ->bindValue(':title',$blogs['title'],PDO::PARAM_STR);
             $stmt ->bindValue(':content',$blogs['content'],PDO::PARAM_STR);
-            $stmt ->bindValue(':publish_status',$blogs['publish_status'],PDO::PARAM_INT);
             $stmt ->execute();
             $dbh -> commit();
             echo '登録完了しました。';
@@ -62,7 +61,6 @@ Class Blog extends Dbc
                     name = :name
                     ,title = :title
                     ,content = :content
-                    ,publish_status = :publish_status
                 WHERE
                     id = :id";
     
@@ -74,7 +72,6 @@ Class Blog extends Dbc
                 $stmt ->bindValue(':name',$blogs['name'],PDO::PARAM_STR);
                 $stmt ->bindValue(':title',$blogs['title'],PDO::PARAM_STR);
                 $stmt ->bindValue(':content',$blogs['content'],PDO::PARAM_STR);
-                $stmt ->bindValue(':publish_status',$blogs['publish_status'],PDO::PARAM_INT);
                 $stmt ->bindValue(':id',$blogs['id'],PDO::PARAM_INT);
                 $stmt ->execute();
                 $dbh -> commit();
@@ -109,10 +106,10 @@ Class Blog extends Dbc
         // {
         //     exit('カテゴリーを選択してください');
         // }
-        if(empty($blogs['publish_status']))
-        {
-            exit('公開ステータスを選択してください');
-        }
+        // if(empty($blogs['publish_status']))
+        // {
+        //     exit('公開ステータスを選択してください');
+        // }
     }
 }
 ?>
