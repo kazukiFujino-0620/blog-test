@@ -41,6 +41,7 @@ $publish_status = $result['publish_status'];
         <input type ="radio" name="publish_status" value="0"<?php if($publish_status == 0) echo "checked"?>>非公開 -->
         <br>
         <input type ="submit" value="送信">
+        <button type="button" onclick="history.back()">戻る</button>
     </form>
 </body>
 </html>

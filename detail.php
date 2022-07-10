@@ -21,5 +21,7 @@ $result = $blog->getBlog($_GET['id']);
         <p>名前:<?php echo $result['name']?></p>
         <hr>
         <p>本文:<?php echo $result['content']?></p>
+        <br>
+        <button type="button" onclick="history.back()">戻る</button>
 </body>
 </html>
