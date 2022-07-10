@@ -47,11 +47,8 @@ $blogData = $blog->getAll();
     <hr>
     <h3>新規投稿</h3>
     <form action ="blog_create.php" method="POST">
-        <p>タイトル:</p>
-        <input type="text" name="title">
-        <p>名前:</p>
-        <input type="text" name="name">
-        <br>
+        <p>タイトル:<input type="text" name="title"></p>
+        <p>名前:<input type="text" name="name"></p>
         <p>本文:</p>
         <textarea name="content" id="content" cols="30" rows="10"></textarea>
         <br>
