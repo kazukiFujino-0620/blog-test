@@ -40,7 +40,8 @@ $publish_status = $result['publish_status'];
         <input type ="radio" name="publish_status" value="0">非公開
         <br> -->
         <input type ="submit" value="返信">
-        <button type="button" onclick="history.back()">戻る</button>
+        <br>
+        <botton><a href="index.php">ページトップへ戻る</a></botton>
     </form>
 </body>
 </html>

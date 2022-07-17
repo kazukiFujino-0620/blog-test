@@ -44,7 +44,7 @@ Class Blog extends Dbc
             $dbh -> commit();
             echo '登録完了しました。';
             echo '<br>';
-            echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">前に戻る</a>';
+            echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">トップページに戻る</a>';
         }catch(PDOException $e){
             $dbh->rollBack();
             var_dump($blogs);
@@ -78,6 +78,8 @@ Class Blog extends Dbc
                 $stmt ->execute();
                 $dbh -> commit();
                 echo '更新完了しました。';
+                echo '<br>';
+                echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">トップページに戻る</a>';
             }catch(PDOException $e){
                 $dbh->rollBack();
                 exit($e);
