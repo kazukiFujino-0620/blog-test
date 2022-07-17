@@ -40,6 +40,7 @@ $blogData = $blog->getAll();
             <p style="text-align: right">
                 <td><a href="/update_form.php?id=<?php echo $column['id']?>">編集</td>
                 <td><a href="/reply.php?id=<?php echo $column['id']?>">返信</td>
+                <td><a href="/blog_delete.php?id=<?php echo $column['id']?>">削除</td>
             </p>
         </tr>
         <?php endforeach; ?>
