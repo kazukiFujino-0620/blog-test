@@ -87,6 +87,33 @@ Class Blog extends Dbc
         }
     }
 
+    public function deleteBlog($id)
+    {
+        if(empty($id))
+        {
+            exit('IDが不正です。');
+        }
+    $sql =
+            "DELETE fROM 
+                blog 
+            WHERE 
+                id = :id";
+    $dbh = $this->dbConnect();
+    $dbh -> beginTransaction();
+    try
+        {
+            $stmt = $dbh->prepare($sql);
+            $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
+            $stmt ->execute();
+            $dbh -> commit(); 
+            echo '削除しました';
+            echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">トップページに戻る</a>';
+        }catch(PDOException $e){
+            $dbh->rollBack();
+            exit($e);
+        }
+    }
+
     // ブログのバリデーション
     function blogValidate($blogs)
     {

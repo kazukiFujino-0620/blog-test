@@ -57,23 +57,6 @@ Class Dbc
 
         return $result;
     }
-
-    function deleteBlog($id)
-    {
-        if(empty($id))
-        {
-            exit('IDが不正です。');
-        }
-        $dbh = $this->dbConnect();
-        $stmt = $dbh->prepare('DELETE fROM blog WHERE id = :id');
-        $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
-
-        // 処理実行
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        exit('削除しました');
-    }
 }
 
 ?>
