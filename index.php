@@ -15,11 +15,12 @@ $blogData = $blog->getAll();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <title>掲示板一覧</title>
 </head>
 <body>
 <h2>お試し掲示板</h2>
-    <h3>一覧</h3>
+    <h3>投稿一覧</h3>
     <table>
         <?php foreach($blogData as $column): ?>
         <tr>
@@ -31,17 +32,20 @@ $blogData = $blog->getAll();
         </tr>
         <tr>
             <td>本文:</td>
+            <div class="container bg-light">
+                <div class="btn-toolbar">
+                    <div class="btn-group ml-auto">
+                        <td><a href="/update_form.php?id=<?php echo $column['id']?>" class = "btn btn-primary">編集</td>
+                        <td><a href="/blog_delete.php?id=<?php echo $column['id']?>" class = "btn btn-primary">削除</td>
+                        <td><a href="/reply.php?id=<?php echo $column['id']?>" class = "btn btn-primary">返信</td>
+                    </div>
+                </div>
+            </div>
         </tr>
         <tr>
-            <td><?php echo $column['content']?></td>
-        </tr>
-        <tr>
-            <td></td>
-            <p style="text-align: right">
-                <td><a href="/update_form.php?id=<?php echo $column['id']?>">編集</td>
-                <td><a href="/reply.php?id=<?php echo $column['id']?>">返信</td>
-                <td><a href="/blog_delete.php?id=<?php echo $column['id']?>">削除</td>
-            </p>
+            <td>
+                <?php echo $column['content']?>
+            </td>
         </tr>
         <?php endforeach; ?>
     </table>
@@ -62,8 +66,11 @@ $blogData = $blog->getAll();
         <input type ="radio" name="publish_status" value="1" checked>公開
         <input type ="radio" name="publish_status" value="0">非公開
         <br> -->
-        <input type ="submit" value="送信">
+        <input type ="submit" class = "btn btn-primary" value="送信">
     </form>
+    <script type="text/javascript" src="js/jquery-3.6.0.js"></script>
+　<script src="js/popper.min.js"></script>
+　<script type="text/javascript" src="js/bootstrap.min.js"></script>
 </body>
 </html>
 </body>
