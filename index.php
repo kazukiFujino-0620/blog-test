@@ -6,6 +6,8 @@ $blog = new Blog();
 // 取得データ表示
 $blogData = $blog->getAll();
 
+$blogCount = $blog->BlogCount();
+
 ?>
 
 
@@ -20,7 +22,7 @@ $blogData = $blog->getAll();
 </head>
 <body>
 <h2>お試し掲示板</h2>
-    <h3>投稿一覧</h3>
+    <h4>投稿一覧</h4>
     <table>
         <?php foreach($blogData as $column): ?>
         <tr>
@@ -32,15 +34,9 @@ $blogData = $blog->getAll();
         </tr>
         <tr>
             <td>本文:</td>
-            <div class="container bg-light">
-                <div class="btn-toolbar">
-                    <div class="btn-group ml-auto">
-                        <td><a href="/update_form.php?id=<?php echo $column['id']?>" class = "btn btn-primary">編集</td>
-                        <td><a href="/blog_delete.php?id=<?php echo $column['id']?>" class = "btn btn-primary">削除</td>
-                        <td><a href="/reply.php?id=<?php echo $column['id']?>" class = "btn btn-primary">返信</td>
-                    </div>
-                </div>
-            </div>
+            <td><a href="/update_form.php?id=<?php echo $column['id']?>" class = "btn btn-primary">編集</td>
+            <td><a href="/blog_delete.php?id=<?php echo $column['id']?>" class = "btn btn-primary">削除</td>
+            <td><a href="/reply.php?id=<?php echo $column['id']?>" class = "btn btn-primary">返信</td>
         </tr>
         <tr>
             <td>
@@ -49,29 +45,37 @@ $blogData = $blog->getAll();
         </tr>
         <?php endforeach; ?>
     </table>
-    <hr>
-    <h3>新規投稿</h3>
-    <form action ="blog_create.php" method="POST">
-        <p>タイトル:<input type="text" name="title"></p>
-        <p>名前:<input type="text" name="name"></p>
-        <p>本文:</p>
-        <textarea name="content" id="content" cols="30" rows="10"></textarea>
-        <br>
-        <!-- <p>カテゴリ:</p>
-        <select name="category">
-            <option value="1">日常</option>
-            <option value="2">動画編集</option>
-        </select> -->
-        <!-- <br>
-        <input type ="radio" name="publish_status" value="1" checked>公開
-        <input type ="radio" name="publish_status" value="0">非公開
-        <br> -->
-        <input type ="submit" class = "btn btn-primary" value="送信">
-    </form>
-    <script type="text/javascript" src="js/jquery-3.6.0.js"></script>
-　<script src="js/popper.min.js"></script>
-　<script type="text/javascript" src="js/bootstrap.min.js"></script>
 </body>
-</html>
+<body>
+    <hr>
+</body>
+<body>
+<br>
+    <table>
+        <h4>新規投稿</h4>
+        <form action ="blog_create.php" method="POST">
+            <br>
+            <p>タイトル:<input type="text" name="title"></p>
+            <br>
+            <p>名前:<input type="text" name="name"></p>
+            <br>
+            <p>本文:</p>
+            <textarea name="content" id="content" cols="30" rows="10"></textarea>
+            <br>
+            <!-- <p>カテゴリ:</p>
+            <select name="category">
+                <option value="1">日常</option>
+                <option value="2">動画編集</option>
+            </select> -->
+            <!-- <br>
+            <input type ="radio" name="publish_status" value="1" checked>公開
+            <input type ="radio" name="publish_status" value="0">非公開
+            <br> -->
+            <input type ="submit" class = "btn btn-primary" value="送信">
+        </form>
+        <script type="text/javascript" src="js/jquery-3.6.0.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    </table>
 </body>
 </html>
