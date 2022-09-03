@@ -26,13 +26,16 @@ Class Dbc
     function getAll()
     {
         $dbh = $this->dbConnect();
-        $sql = 'SELECT * FROM blog';
+        $sql = 'SELECT * 
+                FROM blog
+                ORDER BY id DESC';
         $stmt = $dbh->query($sql);
         $result = $stmt -> fetchall(PDO::FETCH_ASSOC);
         return $result;
         $dbh = null;
     }
 
+    //1データ取得
     function getBlog($id)
     {
         if(empty($id))
@@ -56,6 +59,42 @@ Class Dbc
         }
 
         return $result;
+    }
+
+    function BlogCount()
+    {
+
+        $dbh = $this->dbConnect();
+
+        //データ取得
+        $sql = "SELECT COUNT(*)
+            as
+            cnt
+            FROM
+                blog";
+
+        // 処理実行
+        $stmt = $dbh->query($sql);
+        $result = $stmt->fetchColumn();
+
+        return $result;
+        $dbh = null;
+    }
+
+    function getData($getpage,$page_num)
+    {
+        $dbh = $this->dbConnect();
+        $stmt = $dbh->prepare
+        ('SELECT * 
+                FROM blog
+                ORDER BY id DESC
+                LIMIT ? ,?');
+        $stmt->bindValue(1,($getpage -1 ) * $page_num , PDO::PARAM_INT);
+        $stmt->bindValue(2,$page_num , PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt -> fetchall(PDO::FETCH_ASSOC);
+        return $result;
+        $dbh = null;
     }
 }
 
